@@ -16,10 +16,11 @@ const Footer = () => {
             <div >
                 <h3 className="text-white font-bold text-2xl mb-2">Company</h3>
                 <div className="flex flex-col gap-2 ">
-                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg">About Us</a>
+                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg"
+                        onClick={() => navigate("/about_us")}>About Us</a>
                     <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg">Press Release</a>
-                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg">Privacy Policy</a>
-                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg">Terms & Condition</a>
+                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg"
+                        onClick={() => navigate('/terms&conditions')}>Terms & Condition</a>
                     <a href="#"></a>
                 </div>
             </div>

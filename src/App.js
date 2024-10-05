@@ -10,6 +10,8 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import { useState } from 'react';
 import Footer from './components/Footer';
+import TermsConditions from './components/TermsConditions';
+import AboutUs from './components/AboutUs';
 
 function App() {
 
@@ -29,6 +31,8 @@ function App() {
         <Route path='/store' element={<Store />} />
         <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path='/terms&conditions' element={<TermsConditions />} />
+        <Route path='/about_us' element={<AboutUs />} />
       </Routes>
 
       <Footer />
