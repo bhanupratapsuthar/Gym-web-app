@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './components/Home';
+import Home from './Pages/Home';
 import Navbar from './components/Navbar';
 import WorkoutProgram from './components/WorkoutProgram';
-import Blogs from './components/Blogs';
-import ContactUs from './components/ContactUs';
+import Blogs from './Pages/Blogs';
+import ContactUs from './Pages/ContactUs';
 import Store from './components/Store';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import Login from './Pages/Login';
+import Signup from './Pages/Signup';
 import { useState } from 'react';
 import Footer from './components/Footer';
 import TermsConditions from './components/TermsConditions';

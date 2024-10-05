@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SignUpForm from "./SignUpForm";
+import SignUpForm from "../components/SignUpForm";
 
 const Signup = () => {
 
