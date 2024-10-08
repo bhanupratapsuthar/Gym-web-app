@@ -12,6 +12,9 @@ import { useState } from 'react';
 import Footer from './components/Footer';
 import TermsConditions from './components/TermsConditions';
 import AboutUs from './components/AboutUs';
+import Gallery from './components/Gallary';
+import datas from './data/data1';
+import FaQs from './components/FaQs';
 
 function App() {
 
@@ -24,7 +27,10 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path='/' element={<Home isLoggedIn={isLoggedIn} />} />
+        <Route path='/' element={<Home
+          isLoggedIn={isLoggedIn}
+          datas={datas}
+        />} />
         <Route path='/workout' element={<WorkoutProgram />} />
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/contact_us' element={<ContactUs />} />
@@ -33,6 +39,9 @@ function App() {
         <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/terms&conditions' element={<TermsConditions />} />
         <Route path='/about_us' element={<AboutUs />} />
+        <Route path='/gallary' element={<Gallery />} />
+        <Route path='/faqs' element={<FaQs />} />
+
       </Routes>
 
       <Footer />

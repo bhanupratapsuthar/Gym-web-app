@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
     return (
         // set width of navBar
-        <div className="">
+        <div className="w-screen">
             <nav className="flex justify-between h-[87px] sticky items-center
             bg-black ">
                 <NavLink to='/'>

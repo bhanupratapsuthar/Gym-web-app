@@ -1,13 +1,15 @@
 import React from "react";
+import Picture1 from '../pictures/pexels-leonardho-2468339.jpg'
 
 const AboutUs = () => {
     return (
         <div className="">
-            <div className="h-screen aboutPage">
-                <h1 className="text-8xl text-black pl-[150px] pt-[200px] italic font-extrabold">About Us</h1>
+            <div className="h-screen w-screen aboutPage">
+                <h1 className="text-8xl text-black pl-[150px] pt-[200px] italic font-extrabold 
+                transition duration-300 ease-linear hover:scale-110">About Us</h1>
             </div>
 
-            <div className="flex m-20 items-start">
+            <div className="flex justify-between m-20 items-start">
                 <div className="w-[750px] flex flex-col gap-6">
                     <h2 className="font-bold text-xl">About Us-Royal Gym</h2>
                     <p className="font-medium ">
@@ -44,6 +46,15 @@ const AboutUs = () => {
                     <p className="font-medium">
                         Join us at Royal Gym, where strength is not just built, it’s celebrated.
                     </p>
+                </div>
+                <div>
+                    <img
+                        src={Picture1}
+                        alt="willpower"
+                        width={350}
+                        height={500}
+                        className="rounded-md opacity-80 hover:opacity-100 transition duration-700 ease-linear 
+                        hover:scale-110" />
                 </div>
             </div>
         </div>

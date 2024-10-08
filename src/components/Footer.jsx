@@ -11,7 +11,7 @@ const Footer = () => {
 
     return (
         <div
-            className="static bottom-0 bg-slate-900  w-full h-[350px]
+            className="static bottom-0 bg-slate-900  w-screen h-[350px]
         flex flex-row justify-evenly pt-[75px] uppercase">
             <div >
                 <h3 className="text-white font-bold text-2xl mb-2">Company</h3>
@@ -40,9 +40,12 @@ const Footer = () => {
             <div>
                 <h3 className="text-white font-bold text-2xl mb-2">Member</h3>
                 <div className="flex flex-col gap-2 ">
-                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg">FAQ's</a>
-                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg">Contact Us</a>
-                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg">Events & Gallery</a>
+                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg"
+                        onClick={() => navigate('/faqs')}>FAQ's</a>
+                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg"
+                        onClick={() => navigate('/contact_us')}>Contact Us</a>
+                    <a href="#" className="text-white opacity-50 hover:opacity-100 hover:scale-110 transition duration-200 ease-in-out font-bold text-lg"
+                        onClick={() => navigate('/gallary')}>Events & Gallery</a>
                 </div>
             </div>
 
