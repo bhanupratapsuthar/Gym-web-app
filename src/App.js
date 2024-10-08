@@ -22,10 +22,10 @@ function App() {
 
 
   return (
-    <div className='relative'>
+    <div className='overflow-x-hidden'>
+
 
       <Navbar />
-
       <Routes>
         <Route path='/' element={<Home
           isLoggedIn={isLoggedIn}

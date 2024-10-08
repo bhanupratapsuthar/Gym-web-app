@@ -8,7 +8,7 @@ const Main1 = (props) => {
             <div
                 className="w-screen h-screen">
                 <img src={data.image} alt="first image"
-                    className="w-[100%] h-[100%]" />
+                    className=" object-cover w-[100%] h-[100%]" />
             </div>
         </div>
     )

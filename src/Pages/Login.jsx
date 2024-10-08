@@ -42,8 +42,9 @@ const Login = () => {
     }
 
     return (
-        <div className="h-full pl-[50px] pb-48 loginPage">
-            <div className="w-[500px] ">
+        <div className=" h-[100vh] flex  items-center loginPage">
+            <div className="w-11/12 flex items-center mx-auto">
+            <div className="w-[500px] nothing">
                 <form onSubmit={submitHandler}>
                     <h1 className="pt-20  text-white text-4xl font-semibold">Login Account</h1>
                     <div className="w-full flex flex-col justify-center text-white px-14 py-8">
@@ -109,6 +110,7 @@ const Login = () => {
                     Create New Account
                 </button>
 
+            </div>
             </div>
 
             {/* <div>
