@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home';
 import Navbar from './components/Navbar';
-import WorkoutProgram from './components/WorkoutProgram';
 import Blogs from './Pages/Blogs';
 import ContactUs from './Pages/ContactUs';
 import Store from './components/Store';
@@ -15,6 +14,9 @@ import AboutUs from './components/AboutUs';
 import Gallery from './components/Gallary';
 import datas from './data/data1';
 import FaQs from './components/FaQs';
+import MemberShips from './components/MemberShips';
+import MemberShipPlans from './components/MemberShipPlans';
+import ThankYou from './components/ThankYou';
 
 function App() {
 
@@ -31,7 +33,6 @@ function App() {
           isLoggedIn={isLoggedIn}
           datas={datas}
         />} />
-        <Route path='/workout' element={<WorkoutProgram />} />
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/contact_us' element={<ContactUs />} />
         <Route path='/store' element={<Store />} />
@@ -41,7 +42,9 @@ function App() {
         <Route path='/about_us' element={<AboutUs />} />
         <Route path='/gallary' element={<Gallery />} />
         <Route path='/faqs' element={<FaQs />} />
-
+        <Route path='/memberships' element={<MemberShips />} />
+        <Route path='/membership+plan' element={<MemberShipPlans />} />
+        <Route path='/query+submit' element={<ThankYou />} />
       </Routes>
 
       <Footer />

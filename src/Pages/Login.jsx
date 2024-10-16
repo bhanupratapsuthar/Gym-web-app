@@ -44,73 +44,75 @@ const Login = () => {
     return (
         <div className=" h-[100vh] flex  items-center loginPage">
             <div className="w-11/12 flex items-center mx-auto">
-            <div className="w-[500px] nothing">
-                <form onSubmit={submitHandler}>
-                    <h1 className="pt-20  text-white text-4xl font-semibold">Login Account</h1>
-                    <div className="w-full flex flex-col justify-center text-white px-14 py-8">
-                        <label htmlFor="username">
-                            <p className="font-semibold text-lg text-white">Email/Phone</p>
-                            <input
-                                required
-                                type="text"
-                                onChange={changeHandler}
-                                name="username"
-                                placeholder="Email/Phone"
-                                className="bg-transparent border-2 border-slate-600 rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-black font-medium"
-                                value={formData.username} />
-                        </label>
+                <div className="w-[500px] nothing">
+                    <form onSubmit={submitHandler}>
+                        <h1 className="pt-20  text-white text-4xl font-semibold ml-10">Login Account</h1>
+                        <div className="w-full flex flex-col justify-center text-white px-14 py-8">
+                            <label htmlFor="username">
+                                <p className="font-semibold text-lg text-white">Email/Phone</p>
+                                <input
+                                    required
+                                    type="text"
+                                    onChange={changeHandler}
+                                    name="username"
+                                    placeholder="Email/Phone"
+                                    className="bg-transparent border-2 border-slate-600 rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-black font-medium"
+                                    value={formData.username} />
+                            </label>
 
-                        <label htmlFor="password" className="relative">
-                            <p className="font-semibold text-lg text-white">Password</p>
-                            <input
-                                required
-                                type={showPassword ? "text" : "password"}
-                                placeholder="Password"
-                                name="password"
-                                onChange={changeHandler}
-                                value={formData.password}
-                                className="bg-transparent border-2 border-slate-600 rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-black font-medium"
-                            />
+                            <label htmlFor="password" className="relative">
+                                <p className="font-semibold text-lg text-white">Password</p>
+                                <input
+                                    required
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    name="password"
+                                    onChange={changeHandler}
+                                    value={formData.password}
+                                    className="bg-transparent border-2 border-slate-600 rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-black font-medium"
+                                />
 
-                            <span
-                                className="absolute bottom-4 right-2"
-                                onClick={() => setShowPassword((prev) => !prev)}>
-                                {
-                                    showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />
-                                }
-                            </span>
-                        </label>
+                                <span
+                                    className="absolute bottom-4 right-2"
+                                    onClick={() => setShowPassword((prev) => !prev)}>
+                                    {
+                                        showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />
+                                    }
+                                </span>
+                            </label>
 
-                        <Link to='#'>
-                            <p className="text-end text-xs hover:underline">
-                                Forgot Password
-                            </p>
-                        </Link>
+                            <Link to='#'>
+                                <p className="text-end text-xs hover:underline">
+                                    Forgot Password
+                                </p>
+                            </Link>
 
-                        <button
-                            className=" bg-yellow-500 text-lg font-semibold tracking-wide rounded-md h-10 mt-4 w-full">
-                            Sign In
-                        </button>
+                            <button
+                                className=" bg-yellow-500 text-lg font-semibold tracking-wide rounded-md h-10 mt-4 w-full">
+                                Sign In
+                            </button>
 
+                        </div>
+                    </form>
+
+                    <div className="flex w-full items-center my-4 gap-x-2">
+                        <div className="h-[1px] w-full bg-slate-500"></div>
+                        <p className="text-slate-600 font-medium leading-[1.125rem]">
+                            OR
+                        </p>
+                        <div className="h-[1px] w-full bg-slate-500"></div>
                     </div>
-                </form>
 
-                <div className="flex w-full items-center my-4 gap-x-2">
-                    <div className="h-[1px] w-full bg-slate-500"></div>
-                    <p className="text-slate-600 font-medium leading-[1.125rem]">
-                        OR
-                    </p>
-                    <div className="h-[1px] w-full bg-slate-500"></div>
+
+                    <button
+                        className="border rounded-lg h-10 border-black text-lg font-semibold 
+                        hover:bg-black hover:text-white text-white w-[90%] mx-6 mb-4
+                        transition-all duration-300 ease-linear"
+                        onClick={createAccountHandler}>
+                        Create New Account
+                    </button>
+
                 </div>
-
-
-                <button
-                    className="border rounded-md h-10 border-black text-lg font-semibold text-white w-full"
-                    onClick={createAccountHandler}>
-                    Create New Account
-                </button>
-
-            </div>
             </div>
 
             {/* <div>
