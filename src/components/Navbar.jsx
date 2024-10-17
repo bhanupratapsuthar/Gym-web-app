@@ -6,7 +6,7 @@ const Navbar = () => {
         // set width of navBar
         <div className="w-screen">
             <nav className="flex justify-between h-[87px] sticky items-center
-            bg-black ">
+            bg-black mr-4">
                 <NavLink to='/'>
                     <div>
                         <img src="../logo.jpeg" alt="" />
@@ -21,6 +21,12 @@ const Navbar = () => {
 
                     </NavLink>
 
+                    <NavLink to='/membership+plan'
+                        className='text-xl hover:scale-110 font-semibold text-white 
+                        hover:border-b-2 transition duration-200 ease-in'>
+                        <h2>MemberShip</h2>
+                    </NavLink>
+
                     <NavLink to='/blogs'
                         className='text-xl font-semibold text-white 
                         hover:border-b-2 hover:scale-110 transition duration-200 ease-in'>
@@ -31,19 +37,6 @@ const Navbar = () => {
                         hover:border-b-2 transition duration-200 ease-in'>
                         <h2>Store</h2>
                     </NavLink>
-
-                    <NavLink to='/workout'
-                        className='text-xl hover:scale-110 font-semibold text-white 
-                        hover:border-b-2 transition duration-200 ease-in'>
-                        <h2>Workout</h2>
-                    </NavLink>
-
-                    <NavLink to='/contact_us'
-                        className='text-xl hover:scale-110 font-semibold text-white 
-                        hover:border-b-2 transition duration-200 ease-in'>
-                        <h2>Contact Us</h2>
-                    </NavLink>
-
 
 
                     <NavLink to='/login'

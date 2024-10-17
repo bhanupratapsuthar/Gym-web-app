@@ -40,6 +40,7 @@ const SignUpForm = ({ setIsLoggedIn }) => {
 
     return (
         <div className="bg-slate-950 h-[1000px] w-full signUpForm py-[100px] pl-[100px]">
+
             <h1 className="text-5xl font-semibold text-white p-8 pl-[85px]">Create An Account</h1>
             <form
                 className="flex flex-col items-center w-[600px] gap-y-8 nothing p-8"
