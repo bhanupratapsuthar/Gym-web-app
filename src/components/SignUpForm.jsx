@@ -1,188 +1,143 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const SignUpForm = ({ setIsLoggedIn }) => {
-
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        mobile: '',
-        password: '',
-        confirmPassword: ''
-    })
-
+    // React Hook Form setup
+    const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    function changeHandler(event) {
+    const password = watch("password");  // To validate confirm password
 
-        setFormData((prevData) => (
-            {
-                ...prevData,
-                [event.target.name]: event.target.value
-            }
-        ))
-    }
-
-    function submitHandler(event) {
-        event.preventDefault();
-        if (formData.password !== formData.confirmPassword) {
-            toast.error("Passwords are not match");
+    const onSubmit = async (data) => {
+        if (data.password !== data.confirmPassword) {
+            toast.error("Passwords do not match");
             return;
         }
 
-        setIsLoggedIn(true);
         toast.success("Account Created");
 
-        const accountData = {
-            ...formData
-        };
+        // API call to send form data
+        const accountData = { ...data };
+        console.log("Sending data to API:", accountData);
 
-        const finalData = {
-            ...accountData
+        // Send data to API (replace with your API endpoint)
+        try {
+            const response = await axios.post("http://localhost:8000/auth/signup",accountData)
+
+            console.log(response)
+        } catch (error) {
+            console.error("API error:", error);
+            toast.error("Error occurred while creating account");
         }
-
-        console.log("Printing final account data: ")
-        console.log(finalData);
-        navigate('/');
-    }
+    };
 
     return (
         <div className="bg-slate-950 h-[1000px] w-full signUpForm py-[100px] pl-[100px]">
 
             <h1 className="text-5xl font-semibold text-white p-8 pl-[85px]">Create An Account</h1>
             <form
-                className="flex flex-col items-center w-[600px] nothing gap-y-8 "
-                onSubmit={submitHandler}>
+                className="flex flex-col items-center w-[600px] gap-y-8 nothing p-8"
+                onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-y-[2rem] pt-[1rem]">
 
                     <div className="flex gap-x-4 justify-between">
                         <label>
                             <p className="font-semibold text-lg text-white">First Name</p>
                             <input
-                                required
+                                {...register("firstName", { required: "First Name is required" })}
                                 type="text"
                                 placeholder="Enter First Name"
-                                value={formData.firstName}
-                                name="firstName"
                                 className="bg-transparent border-2 text-white border-slate-600 rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
-                                onChange={changeHandler}
                             />
+                            {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
                         </label>
 
                         <label>
                             <p className="font-semibold text-lg text-white">Last Name</p>
                             <input
-                                required
+                                {...register("lastName", { required: "Last Name is required" })}
                                 type="text"
                                 placeholder="Enter Last Name"
-                                value={formData.lastName}
-                                name="lastName"
                                 className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
-                                onChange={changeHandler}
                             />
+                            {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
                         </label>
                     </div>
 
                     <label>
                         <p className="font-semibold text-lg text-white">Email</p>
                         <input
-                            required
-                            type="Email"
+                            {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" } })}
+                            type="email"
                             placeholder="Enter Email Address"
-                            value={formData.email}
-                            name="email"
                             className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
-                            onChange={changeHandler}
                         />
+                        {errors.email && <span className="text-red-500">{errors.email.message}</span>}
                     </label>
 
                     <label>
                         <p className="font-semibold text-lg text-white">Mobile Number</p>
                         <input
-                            required
+                            {...register("mobile", { required: "Mobile Number is required" })}
                             type="text"
                             placeholder="Enter Mobile Number"
-                            value={formData.mobile}
-                            name="mobile"
                             className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
-                            onChange={changeHandler}
                         />
+                        {errors.mobile && <span className="text-red-500">{errors.mobile.message}</span>}
                     </label>
 
                     <div className="flex justify-between">
                         <label className="relative">
                             <p className="font-semibold text-lg text-white">Password</p>
                             <input
-                                required
+                                {...register("password", { required: "Password is required" })}
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
-                                value={formData.password}
-                                name="password"
                                 className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
-                                onChange={changeHandler}
                             />
                             <span
                                 className="absolute bottom-4 right-2"
                                 onClick={() => setShowPassword((prev) => !prev)}>
                                 {showPassword ? (<AiOutlineEye fontSize={20} fill="#AFB2BF" />) : (<AiOutlineEyeInvisible fontSize={20} fill="#AFB2BF" />)}
                             </span>
+                            {errors.password && <span className="text-red-500">{errors.password.message}</span>}
                         </label>
 
                         <label className="relative">
                             <p className="font-semibold text-lg text-white">Confirm Password</p>
                             <input
-                                required
+                                {...register("confirmPassword", {
+                                    required: "Confirm Password is required",
+                                    validate: value => value === password || "Passwords do not match"
+                                })}
                                 type={showConfirmPassword ? "text" : "password"}
                                 placeholder="Confirm Password"
-                                value={formData.confirmPassword}
-                                name="confirmPassword"
                                 className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
-                                onChange={changeHandler}
                             />
                             <span
                                 className="absolute bottom-4 right-2"
                                 onClick={() => setShowConfirmPassword((prev) => !prev)}>
                                 {showConfirmPassword ? (<AiOutlineEye fontSize={20} fill="#AFB2BF" />) : (<AiOutlineEyeInvisible fontSize={20} fill="#AFB2BF" />)}
                             </span>
+                            {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
                         </label>
                     </div>
                 </div>
-
-
 
                 <button className="w-[73%] h-10 text-2xl mb-8 font-semibold border rounded-md 
                  border-white text-white hover:text-blue-600 hover:bg-white transition duration-500 ease-in-out">
                     Create Account
                 </button>
-
-
             </form>
-
-            <div className="flex w-[600px] items-center my-4 gap-x-2">
-                <div className="h-[1px] w-full bg-slate-500"></div>
-                <p className="text-slate-600 font-medium leading-[1.125rem]">
-                    OR
-                </p>
-                <div className="h-[1px] w-full bg-slate-500"></div>
-            </div>
-
-            <button
-                className="border rounded-md h-10 border-black text-lg font-semibold text-white w-[560px] 
-                hover:bg-amber-400 transition duration-700 ease-linear ml-6">
-                Login Account
-            </button>
-
         </div>
-
-
-    )
-}
+    );
+};
 
 export default SignUpForm;

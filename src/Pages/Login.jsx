@@ -1,84 +1,62 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Picture1 from '../pictures/pexels-cesar-galeao-1673528-3253501.jpg'
-
 
 const Login = () => {
-
     const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [showPassword, setShowPassword] = useState(false);
 
-    const [formData, setFormData] = useState({
-        username: "", password: ""
-    });
+    const onSubmit = async (data) => {
+        try {
+            console.log(data);
+            const { email, password } = data;
 
-    const [showPassword, setShowPassword] = useState(false)
+            const response = await axios.post('http://localhost:8000/auth/login', { email, password });
+            console.log('Login successful:', response.data);
 
-    function changeHandler(event) {
-        setFormData((prevData) => (
-            {
-                ...prevData,
-                [event.target.name]: event.target.value
-            }
-        ))
-    }
-
-    function submitHandler(event) {
-        event.preventDefault();
-
-        const accountData = {
-            ...formData
-        };
-
-        console.log("Printing Login account data: ");
-        console.log(accountData);
-
-        navigate('/dashboard')
-    }
-
-    function createAccountHandler() {
-        navigate('/signup');
-    }
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Error during login:', error);
+        }
+    };
 
     return (
-        <div className=" h-[100vh] flex  items-center loginPage">
+        <div className="h-[100vh] flex items-center loginPage">
             <div className="w-11/12 flex items-center mx-auto">
-                <div className="w-[500px] nothing">
-                    <form onSubmit={submitHandler}>
-                        <h1 className="pt-20  text-white text-4xl font-semibold ml-10">Login Account</h1>
+                <div className="w-[500px]">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <h1 className="pt-20 text-white text-4xl font-semibold">Login Account</h1>
                         <div className="w-full flex flex-col justify-center text-white px-14 py-8">
-                            <label htmlFor="username">
-                                <p className="font-semibold text-lg text-white">Email/Phone</p>
+
+                            <label htmlFor="email">
+                                <p className="font-semibold text-lg text-white">Email</p>
                                 <input
-                                    required
-                                    type="text"
-                                    onChange={changeHandler}
-                                    name="username"
-                                    placeholder="Email/Phone"
+                                    type="email"
+                                    placeholder="Email"
                                     className="bg-transparent border-2 border-slate-600 rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-black font-medium"
-                                    value={formData.username} />
+                                    {...register('email', { required: true })}
+                                />
+                                {errors.email && <p className="text-red-500">Email is required</p>}
                             </label>
 
                             <label htmlFor="password" className="relative">
                                 <p className="font-semibold text-lg text-white">Password</p>
                                 <input
-                                    required
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Password"
-                                    name="password"
-                                    onChange={changeHandler}
-                                    value={formData.password}
                                     className="bg-transparent border-2 border-slate-600 rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-black font-medium"
+                                    {...register('password', { required: true })}
                                 />
-
                                 <span
                                     className="absolute bottom-4 right-2"
                                     onClick={() => setShowPassword((prev) => !prev)}>
-                                    {
-                                        showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />
-                                    }
+                                    {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                                 </span>
+                                {errors.password && <p className="text-red-500">Password is required</p>}
                             </label>
 
                             <Link to='#'>
@@ -88,42 +66,27 @@ const Login = () => {
                             </Link>
 
                             <button
-                                className=" bg-yellow-500 text-lg font-semibold tracking-wide rounded-md h-10 mt-4 w-full">
+                                className="bg-yellow-500 text-lg font-semibold tracking-wide rounded-md h-10 mt-4 w-full">
                                 Sign In
                             </button>
-
                         </div>
                     </form>
 
                     <div className="flex w-full items-center my-4 gap-x-2">
                         <div className="h-[1px] w-full bg-slate-500"></div>
-                        <p className="text-slate-600 font-medium leading-[1.125rem]">
-                            OR
-                        </p>
+                        <p className="text-slate-600 font-medium leading-[1.125rem]">OR</p>
                         <div className="h-[1px] w-full bg-slate-500"></div>
                     </div>
 
-
                     <button
-                        className="border rounded-lg h-10 border-black text-lg font-semibold 
-                        hover:bg-black hover:text-white text-white w-[90%] mx-6 mb-4
-                        transition-all duration-300 ease-linear"
-                        onClick={createAccountHandler}>
+                        className="border rounded-md h-10 border-black text-lg font-semibold text-white w-full"
+                        onClick={() => navigate('/signup')}>
                         Create New Account
                     </button>
-
                 </div>
             </div>
-
-            {/* <div>
-                <img src={Picture1}
-                    alt="faltu"
-                    width="500px"
-                    height='600px'
-                    className="mt-20 " />
-            </div> */}
         </div>
-    )
-}
+    );
+};
 
 export default Login;
