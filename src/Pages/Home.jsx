@@ -9,20 +9,23 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
 
 import '../App.css';
 
 // import required modules
-import { Parallax, Pagination, Navigation } from 'swiper/modules';
+import { Parallax, Pagination, EffectCoverflow, Navigation } from 'swiper/modules';
+import Reviews from "../components/Reviews";
+import testimonials from "../data/data2";
 
 
-const Home = ({datas,isLoggedIn}) => {
-    
+const Home = ({ datas, isLoggedIn }) => {
 
 
-    return (
-        <div className="h-[100vh] ">
-            <Swiper
+
+  return (
+    <div className="h-full ">
+      <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
           '--swiper-pagination-color': '#fff',
@@ -48,16 +51,19 @@ const Home = ({datas,isLoggedIn}) => {
         ></div>
 
         {
-            datas.map((data,i)=>{
-                return <SwiperSlide className="" key={i}>
-                    <img className="object-cover" src={data.image}/>
-                </SwiperSlide>
-            })
+          datas.map((data, i) => {
+            return <SwiperSlide className="" key={i}>
+              <img className="object-cover" src={data.image} />
+            </SwiperSlide>
+          })
         }
       </Swiper>
 
-        </div>
-    )
+      <div className="mt-[200px] h-[600px]">
+        <Reviews testimonials={testimonials} />
+      </div>
+    </div>
+  )
 }
 
 export default Home;

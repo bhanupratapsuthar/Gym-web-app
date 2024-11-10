@@ -27,7 +27,7 @@ const Login = () => {
     return (
         <div className="h-[100vh] flex items-center loginPage">
             <div className="w-11/12 flex items-center mx-auto">
-                <div className="w-[500px]">
+                <div className="w-[500px] nothing">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="pt-20 text-white text-4xl font-semibold">Login Account</h1>
                         <div className="w-full flex flex-col justify-center text-white px-14 py-8">
@@ -79,7 +79,8 @@ const Login = () => {
                     </div>
 
                     <button
-                        className="border rounded-md h-10 border-black text-lg font-semibold text-white w-full"
+                        className="border rounded-md h-10 border-black text-lg font-semibold text-white w-[80%] mx-12 mb-6
+                        hover:bg-white hover:text-white"
                         onClick={() => navigate('/signup')}>
                         Create New Account
                     </button>
