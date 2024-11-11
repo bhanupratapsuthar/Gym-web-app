@@ -18,6 +18,7 @@ import MemberShips from './components/MemberShips';
 import MemberShipPlans from './components/MemberShipPlans';
 import ThankYou from './components/ThankYou';
 import ProductDetail from './Pages/ProductDetail';
+import pictures from './data/data3';
 
 function App() {
 
@@ -42,7 +43,7 @@ function App() {
         <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/terms&conditions' element={<TermsConditions />} />
         <Route path='/about_us' element={<AboutUs />} />
-        <Route path='/gallary' element={<Gallery />} />
+        <Route path='/gallary' element={<Gallery pictures={pictures} />} />
         <Route path='/faqs' element={<FaQs />} />
         <Route path='/memberships' element={<MemberShips />} />
         <Route path='/membership+plan' element={<MemberShipPlans />} />

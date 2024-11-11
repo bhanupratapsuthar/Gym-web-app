@@ -10,17 +10,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
 
 import '../App.css';
 
-// import required modules
+
 import { Parallax, Pagination, Navigation } from 'swiper/modules';
 import ClassCard from "../components/ClassCard";
 import TrainerCard from "../components/TrainerCard";
 
+import Reviews from "../components/Reviews";
+import testimonials from "../data/data2";
 
-const Home = ({datas,isLoggedIn}) => {
-    
+
+const Home = ({ datas, isLoggedIn }) => {
 
 
     return (
@@ -81,11 +84,11 @@ const Home = ({datas,isLoggedIn}) => {
         ></div>
 
         {
-            datas.map((data,i)=>{
-                return <SwiperSlide className="" key={i}>
-                    <img className="object-cover" src={data.image}/>
-                </SwiperSlide>
-            })
+          datas.map((data, i) => {
+            return <SwiperSlide className="" key={i}>
+              <img className="object-cover" src={data.image} />
+            </SwiperSlide>
+          })
         }
       </Swiper>
 
@@ -183,11 +186,15 @@ const Home = ({datas,isLoggedIn}) => {
         </div>
       </section>
 
+      <div className=" h-[600px]">
+        <Reviews testimonials={testimonials} />
+      </div>
      
     </div>
       </>
         
     )
+      
 }
 
 export default Home;
