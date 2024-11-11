@@ -22,7 +22,7 @@ const testimonials = [
     },
     {
         id: 5,
-        desc: "Royal gym is an amazing gym and community of trainers and clients that all want one thing….to be the best version of themselves! Workouts, nutrition plans, everything is tailored to your body and current fitness journey! I came in with back and shoulder issues.",
+        desc: "Royal gym is an amazing gym and community of trainers and clients that all want one thing….to be the best version of themselves! Workouts, nutrition plans, everything is tailored to your body and current fitness journey!",
         author: "Sumit"
     }
 ]

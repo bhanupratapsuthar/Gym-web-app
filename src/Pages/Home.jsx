@@ -59,7 +59,7 @@ const Home = ({ datas, isLoggedIn }) => {
         }
       </Swiper>
 
-      <div className="mt-[200px] h-[600px]">
+      <div className=" h-[600px]">
         <Reviews testimonials={testimonials} />
       </div>
     </div>

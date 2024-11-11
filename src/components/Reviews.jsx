@@ -18,6 +18,7 @@ const Reviews = ({ testimonials }) => {
 
     return (
         <div>
+            <h1 className="text-black font-semibold pb-2 text-3xl text-center">What People say about us!</h1>
             <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, EffectCoverflow]}
