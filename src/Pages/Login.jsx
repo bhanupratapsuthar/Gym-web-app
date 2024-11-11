@@ -1,26 +1,34 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { login } from "../redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+    const dispatch = useDispatch();
+    
+    // Access loading state from Redux store
+    const isLoading = useSelector(state => state.auth.loading);
 
     const onSubmit = async (data) => {
         try {
-            console.log(data);
             const { email, password } = data;
 
-            const response = await axios.post('http://localhost:8000/auth/login', { email, password });
-            console.log('Login successful:', response.data);
+            // Dispatch the login action
+            await dispatch(login({ email, password })).unwrap();
 
+            // Navigate to dashboard after successful login
             navigate('/dashboard');
+            
         } catch (error) {
             console.error('Error during login:', error);
+            toast.error("Login failed! Please try again.");
         }
     };
 
@@ -66,8 +74,10 @@ const Login = () => {
                             </Link>
 
                             <button
-                                className="bg-yellow-500 text-lg font-semibold tracking-wide rounded-md h-10 mt-4 w-full">
-                                Sign In
+                                className={`bg-yellow-500 text-lg font-semibold tracking-wide rounded-md h-10 mt-4 w-full ${isLoading ? 'cursor-wait opacity-50' : ''}`}
+                                disabled={isLoading} // Disable the button when loading
+                            >
+                                {isLoading ? "Loading..." : "Sign In"}
                             </button>
                         </div>
                     </form>
@@ -80,7 +90,8 @@ const Login = () => {
 
                     <button
                         className="border rounded-md h-10 border-black text-lg font-semibold text-white w-full"
-                        onClick={() => navigate('/signup')}>
+                        onClick={() => navigate('/signup')}
+                    >
                         Create New Account
                     </button>
                 </div>

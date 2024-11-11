@@ -17,6 +17,7 @@ import FaQs from './components/FaQs';
 import MemberShips from './components/MemberShips';
 import MemberShipPlans from './components/MemberShipPlans';
 import ThankYou from './components/ThankYou';
+import ProductDetail from './Pages/ProductDetail';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/contact_us' element={<ContactUs />} />
         <Route path='/store' element={<Store />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/terms&conditions' element={<TermsConditions />} />

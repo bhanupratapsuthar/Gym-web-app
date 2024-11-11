@@ -11,7 +11,7 @@ const Footer = () => {
 
     return (
         <div
-            className="static bottom-0 bg-slate-900  w-screen h-[350px]
+            className="static bottom-0 bg-zinc-900  w-screen h-[350px]
         flex flex-row justify-evenly pt-[75px] uppercase">
             <div >
                 <h3 className="text-white font-bold text-2xl mb-2">Company</h3>
