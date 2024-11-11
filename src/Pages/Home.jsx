@@ -21,6 +21,7 @@ import TrainerCard from "../components/TrainerCard";
 
 import Reviews from "../components/Reviews";
 import testimonials from "../data/data2";
+import { classCardData, trainerCardData } from "../data/data4";
 
 
 const Home = ({ datas, isLoggedIn }) => {
@@ -119,25 +120,14 @@ const Home = ({ datas, isLoggedIn }) => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16">OUR CLASSES</h2>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <ClassCard
-              title="CrossFit"
-              trainer="John Smith"
-              time="Mon, Wed, Fri - 10:00 AM"
-              image="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80"
-            />
-            <ClassCard
-              title="Boxing"
-              trainer="Mike Johnson"
-              time="Tue, Thu - 4:00 PM"
-              image="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&q=80"
-            />
-            <ClassCard
-              title="Yoga"
-              trainer="Sarah Williams"
-              time="Every Day - 8:00 AM"
-              image="https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?auto=format&fit=crop&q=80"
-            />
+
+          {
+            classCardData.map((data, i) =>{
+              return <ClassCard key={i} {...data} />
+            })
+          }
           </div>
         </div>
       </section>
@@ -147,21 +137,11 @@ const Home = ({ datas, isLoggedIn }) => {
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16">EXPERT TRAINERS</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TrainerCard
-              name="John Smith"
-              role="CrossFit Expert"
-              image="https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&q=80"
-            />
-            <TrainerCard
-              name="Sarah Williams"
-              role="Yoga Instructor"
-              image="https://wallpapers.com/images/high/lady-in-black-legs-spread-393ln7u6u5eanmas.webp"
-            />
-            <TrainerCard
-              name="Mike Johnson"
-              role="Boxing Coach"
-              image="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&q=80"
-            />
+          {
+            trainerCardData.map((data, i) => {
+              return <TrainerCard key={i} {...data} />
+            })
+          }
           </div>
         </div>
       </section>
