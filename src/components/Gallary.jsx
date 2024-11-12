@@ -8,7 +8,7 @@ const Gallary = ({ pictures }) => {
                 pictures.map((picture, i) => {
                     return (
                         <div className="justify-center">
-                            <img src={picture.image} className="h-[200px]" alt="" loading="lazy" />
+                            <img src={picture.image} className="h-[200px] hover:scale-125 transition duration-300 ease-linear" alt="" loading="lazy" />
                         </div>
                     )
                 })

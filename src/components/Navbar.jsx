@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logo from '../pictures/gym_logo-removebg-preview.png';
 
 const Navbar = () => {
     return (
@@ -8,8 +9,8 @@ const Navbar = () => {
             <nav className="flex justify-between h-[87px] sticky items-center
             bg-black mr-4">
                 <NavLink to='/'>
-                    <div>
-                        <img src="../logo.jpeg" alt="" />
+                    <div className="ml-8 h-28 w-28">
+                        <img src={logo} alt="" />
                     </div>
                 </NavLink>
 
