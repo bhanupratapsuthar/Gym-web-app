@@ -8,134 +8,153 @@ import axios from "axios";
 const SignUpForm = ({ setIsLoggedIn }) => {
     const navigate = useNavigate();
 
-    // React Hook Form setup
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const password = watch("password");  // To validate confirm password
+    const password = watch("password");
+
+    // const onSubmit = async (data) => {
+    //     if (data.password !== data.confirmPassword) {
+    //         toast.error("Passwords do not match");
+    //         return;
+    //     }
+
+    //     toast.success("Account Created");
+    //     const accountData = { ...data };
+
+    //     try {
+    //         const response = await axios.post("http://localhost:8000/auth/signup", accountData);
+    //         console.log(response);
+    //     } catch (error) {
+    //         console.error("API error:", error);
+    //         toast.error("Error occurred while creating account");
+    //     }
+    // };
 
     const onSubmit = async (data) => {
         if (data.password !== data.confirmPassword) {
             toast.error("Passwords do not match");
             return;
         }
-
-        toast.success("Account Created");
-
-        // API call to send form data
-        const accountData = { ...data };
-        console.log("Sending data to API:", accountData);
-
-        // Send data to API (replace with your API endpoint)
+    
         try {
-            const response = await axios.post("http://localhost:8000/auth/signup",accountData)
-
-            console.log(response)
+            const response = await axios.post("http://localhost:8000/auth/signup", data);
+            toast.success("Account Created");
+            navigate("/otp", { state: { email: data.email } });
         } catch (error) {
             console.error("API error:", error);
             toast.error("Error occurred while creating account");
         }
     };
+    
 
     return (
-        <div className="bg-slate-950 h-[1000px] w-full signUpForm py-[100px] pl-[100px]">
-
-            <h1 className="text-5xl font-semibold text-white p-8 pl-[85px]">Create An Account</h1>
-            <form
-                className="flex flex-col items-center w-[600px] gap-y-8 nothing p-8"
-                onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex flex-col gap-y-[2rem] pt-[1rem]">
-
-                    <div className="flex gap-x-4 justify-between">
-                        <label>
-                            <p className="font-semibold text-lg text-white">First Name</p>
+        <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black min-h-screen flex items-center justify-center p-4">
+            <div className="bg-gray-900 rounded-lg shadow-lg p-8 w-full max-w-lg">
+                <h1 className="text-3xl font-bold text-white mb-8 text-center">
+                    Create An Account
+                </h1>
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <label className="flex-1">
+                            <p className="font-semibold text-sm text-gray-300 mb-1">First Name</p>
                             <input
                                 {...register("firstName", { required: "First Name is required" })}
                                 type="text"
                                 placeholder="Enter First Name"
-                                className="bg-transparent border-2 text-white border-slate-600 rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
+                                className="w-full bg-gray-800 text-white rounded-lg border border-gray-700 p-3 focus:outline-none focus:border-blue-500"
                             />
-                            {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
+                            {errors.firstName && <span className="text-red-500 text-xs">{errors.firstName.message}</span>}
                         </label>
 
-                        <label>
-                            <p className="font-semibold text-lg text-white">Last Name</p>
+                        <label className="flex-1">
+                            <p className="font-semibold text-sm text-gray-300 mb-1">Last Name</p>
                             <input
                                 {...register("lastName", { required: "Last Name is required" })}
                                 type="text"
                                 placeholder="Enter Last Name"
-                                className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
+                                className="w-full bg-gray-800 text-white rounded-lg border border-gray-700 p-3 focus:outline-none focus:border-blue-500"
                             />
-                            {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
+                            {errors.lastName && <span className="text-red-500 text-xs">{errors.lastName.message}</span>}
                         </label>
                     </div>
 
                     <label>
-                        <p className="font-semibold text-lg text-white">Email</p>
+                        <p className="font-semibold text-sm text-gray-300 mb-1">Email</p>
                         <input
-                            {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" } })}
+                            {...register("email", {
+                                required: "Email is required",
+                                pattern: {
+                                    value: /^\S+@\S+$/i,
+                                    message: "Invalid email address",
+                                },
+                            })}
                             type="email"
                             placeholder="Enter Email Address"
-                            className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
+                            className="w-full bg-gray-800 text-white rounded-lg border border-gray-700 p-3 focus:outline-none focus:border-blue-500"
                         />
-                        {errors.email && <span className="text-red-500">{errors.email.message}</span>}
+                        {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
                     </label>
 
                     <label>
-                        <p className="font-semibold text-lg text-white">Mobile Number</p>
+                        <p className="font-semibold text-sm text-gray-300 mb-1">Mobile Number</p>
                         <input
                             {...register("mobile", { required: "Mobile Number is required" })}
                             type="text"
                             placeholder="Enter Mobile Number"
-                            className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
+                            className="w-full bg-gray-800 text-white rounded-lg border border-gray-700 p-3 focus:outline-none focus:border-blue-500"
                         />
-                        {errors.mobile && <span className="text-red-500">{errors.mobile.message}</span>}
+                        {errors.mobile && <span className="text-red-500 text-xs">{errors.mobile.message}</span>}
                     </label>
 
-                    <div className="flex justify-between">
-                        <label className="relative">
-                            <p className="font-semibold text-lg text-white">Password</p>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <label className="relative flex-1">
+                            <p className="font-semibold text-sm text-gray-300 mb-1">Password</p>
                             <input
                                 {...register("password", { required: "Password is required" })}
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
-                                className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
+                                className="w-full bg-gray-800 text-white rounded-lg border border-gray-700 p-3 focus:outline-none focus:border-blue-500"
                             />
                             <span
-                                className="absolute bottom-4 right-2"
-                                onClick={() => setShowPassword((prev) => !prev)}>
-                                {showPassword ? (<AiOutlineEye fontSize={20} fill="#AFB2BF" />) : (<AiOutlineEyeInvisible fontSize={20} fill="#AFB2BF" />)}
+                                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                                onClick={() => setShowPassword((prev) => !prev)}
+                            >
+                                {showPassword ? <AiOutlineEye fontSize={20} /> : <AiOutlineEyeInvisible fontSize={20} />}
                             </span>
-                            {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+                            {errors.password && <span className="text-red-500 text-xs">{errors.password.message}</span>}
                         </label>
 
-                        <label className="relative">
-                            <p className="font-semibold text-lg text-white">Confirm Password</p>
+                        <label className="relative flex-1">
+                            <p className="font-semibold text-sm text-gray-300 mb-1">Confirm Password</p>
                             <input
                                 {...register("confirmPassword", {
                                     required: "Confirm Password is required",
-                                    validate: value => value === password || "Passwords do not match"
+                                    validate: value => value === password || "Passwords do not match",
                                 })}
                                 type={showConfirmPassword ? "text" : "password"}
                                 placeholder="Confirm Password"
-                                className="bg-transparent border-2 border-slate-600 text-white rounded-md my-2 h-8 w-full placeholder:pl-3 placeholder:text-white font-medium"
+                                className="w-full bg-gray-800 text-white rounded-lg border border-gray-700 p-3 focus:outline-none focus:border-blue-500"
                             />
                             <span
-                                className="absolute bottom-4 right-2"
-                                onClick={() => setShowConfirmPassword((prev) => !prev)}>
-                                {showConfirmPassword ? (<AiOutlineEye fontSize={20} fill="#AFB2BF" />) : (<AiOutlineEyeInvisible fontSize={20} fill="#AFB2BF" />)}
+                                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                            >
+                                {showConfirmPassword ? <AiOutlineEye fontSize={20} /> : <AiOutlineEyeInvisible fontSize={20} />}
                             </span>
-                            {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
+                            {errors.confirmPassword && <span className="text-red-500 text-xs">{errors.confirmPassword.message}</span>}
                         </label>
                     </div>
-                </div>
 
-                <button className="w-[73%] h-10 text-2xl mb-8 font-semibold border rounded-md 
-                 border-white text-white hover:text-blue-600 hover:bg-white transition duration-500 ease-in-out">
-                    Create Account
-                </button>
-            </form>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 transition duration-300"
+                    >
+                        Create Account
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
