@@ -52,12 +52,16 @@ const authSlice = createSlice({
         clearAuth: (state) => {
             return initialState;
         },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        }
     },
 });
 
-export const {user} = (state) => state.authSlice;
-export const {token} = (state) => state.authSlice.user;
-export const {loading} = (state) => state.authSlice;
-export const { clearAuth } = authSlice.actions;
+export const {user} = (state) => state.auth.user;
+export const token = (state) => state.auth.user?.token || null;
+export const loading = (state) => state.auth.loading;
+export const error = (state) => state.auth.error;
+export const { clearAuth,setLoading } = authSlice.actions;
 
 export default authSlice.reducer;

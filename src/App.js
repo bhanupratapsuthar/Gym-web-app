@@ -14,12 +14,14 @@ import AboutUs from './components/AboutUs';
 import Gallery from './components/Gallary';
 import datas from './data/data1';
 import FaQs from './components/FaQs';
-import MemberShips from './components/MemberShips';
-import MemberShipPlans from './components/MemberShipPlans';
+import MemberShipsFaq from './components/MemberShipsFaq';
+import MemberShipPlansInquery from './components/MemberShipPlansInquery';
 import ThankYou from './components/ThankYou';
 import ProductDetail from './Pages/ProductDetail';
 import pictures from './data/data3';
 import OtpPage from './components/OtpPage';
+import { BlogList } from './components/blog/BlogList';
+import { BlogDetail } from './components/blog/BlogDetail';
 
 function App() {
 
@@ -36,7 +38,8 @@ function App() {
           isLoggedIn={isLoggedIn}
           datas={datas}
         />} />
-        <Route path='/blogs' element={<Blogs />} />
+        <Route path='/blogs' element={<BlogList />} />
+        <Route path="/blogs/:id" element={<BlogDetail />} />
         <Route path='/contact_us' element={<ContactUs />} />
         <Route path='/store' element={<Store />} />
         <Route path="/product/:id" element={<ProductDetail />} />
@@ -47,8 +50,8 @@ function App() {
         <Route path='/about_us' element={<AboutUs />} />
         <Route path='/gallary' element={<Gallery pictures={pictures} />} />
         <Route path='/faqs' element={<FaQs />} />
-        <Route path='/memberships' element={<MemberShips />} />
-        <Route path='/membership+plan' element={<MemberShipPlans />} />
+        <Route path='/memberships' element={<MemberShipsFaq />} />
+        <Route path='/membership+plan' element={<MemberShipPlansInquery />} />
         <Route path='/query+submit' element={<ThankYou />} />
       </Routes>
 

@@ -2,9 +2,10 @@ import { queryByRole } from "@testing-library/react";
 import React, { useState } from "react";
 import { FcUnlock } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import { MembershipPlans } from "./membership/MembershipPlans";
 
 
-const MemberShipPlans = () => {
+const MemberShipPlansInquery = () => {
 
     const navigate = useNavigate();
 
@@ -41,7 +42,11 @@ const MemberShipPlans = () => {
     }
 
     return (
-        <div className="w-full h-full bg-slate-900 text-white flex justify-center">
+        <div className="flex-col items-center w-full h-full bg-slate-900 text-white flex justify-center">
+
+                 <MembershipPlans/>
+
+                 
             <div className="w-11/12 max-w-[680px] mt-[5rem] ">
                 <h1 className="font-bold text-5xl">Membership Inquiry</h1>
                 <div className="">
@@ -121,4 +126,4 @@ const MemberShipPlans = () => {
     )
 }
 
-export default MemberShipPlans;
+export default MemberShipPlansInquery;

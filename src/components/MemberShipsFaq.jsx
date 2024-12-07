@@ -1,7 +1,7 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
 
-const MemberShips = () => {
+const MemberShipsFaq = () => {
     const faqs = [
         {
             question: "How old do I have to be to join Fitness?",
@@ -97,4 +97,4 @@ const MemberShips = () => {
     );
 };
 
-export default MemberShips;
+export default MemberShipsFaq;

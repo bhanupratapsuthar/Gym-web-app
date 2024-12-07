@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MemberShips from "./MemberShips";
+import MemberShipsFaq from "./MemberShipsFaq";
 import Gym from "./Gym";
 
 const FaQs = () => {
@@ -22,7 +22,7 @@ const FaQs = () => {
             <div className="mt-2">
                 {
                     type == "MemberShips" ?
-                        (<MemberShips />) :
+                        (<MemberShipsFaq />) :
                         (<Gym />)
 
                 }

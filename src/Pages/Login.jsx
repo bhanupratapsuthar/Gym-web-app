@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
-import { login } from "../redux/slices/authSlice";
+import { loading, login, setLoading } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -12,17 +12,23 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
-    // Access loading state from Redux store
-    const isLoading = useSelector(state => state.auth.loading);
+    const isLoading = useSelector(loading);
+    
 
     const onSubmit = async (data) => {
+        const toastId = toast.loading("Loading...");
         try {
+            dispatch(setLoading(true))
             const { email, password } = data;
             await dispatch(login({ email, password })).unwrap();
             navigate('/dashboard');
+            dispatch(setLoading(false))
         } catch (error) {
             console.error('Error during login:', error);
-            toast.error("Login failed! Please try again.");
+            toast.error(`${error}`);
+        }finally{
+            dispatch(setLoading(false))
+            toast.dismiss(toastId)
         }
     };
 
@@ -113,17 +119,7 @@ const Login = () => {
                                 disabled={isLoading}
                                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-900 bg-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                {isLoading ? (
-                                    <span className="flex items-center">
-                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                        Loading...
-                                    </span>
-                                ) : (
                                     'Sign in'
-                                )}
                             </button>
                         </div>
                     </form>
