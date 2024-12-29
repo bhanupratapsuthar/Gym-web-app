@@ -7,6 +7,7 @@ const initialState = {
     isLoggedIn: false,
     loading: false,
     error: null,
+    token:null
 };
 
 export const login = createAsyncThunk(
@@ -17,7 +18,6 @@ export const login = createAsyncThunk(
             
             // Assuming the response includes a token
             const token = response.data.token;
-            console.log(response)
             if (token) {
                 Cookies.set("token", token, { expires: 1, secure: true, path: "/" });
             }
@@ -42,6 +42,7 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.isLoggedIn = true;
                 state.user = action.payload;
+                state.token = action.payload.token;
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
@@ -58,8 +59,8 @@ const authSlice = createSlice({
     },
 });
 
-export const {user} = (state) => state.auth.user;
-export const token = (state) => state.auth.user?.token || null;
+export const user = (state) => state.auth.user;
+export const token = (state) => state.auth.token || null;
 export const loading = (state) => state.auth.loading;
 export const error = (state) => state.auth.error;
 export const { clearAuth,setLoading } = authSlice.actions;

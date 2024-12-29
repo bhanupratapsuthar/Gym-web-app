@@ -47,14 +47,12 @@ const Reviews = ({ testimonials }) => {
 
                 pagination={{ el: '.swiper-pagination', clickable: true }}
                 scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
 
             >
 
                 {
                     testimonials.map((testimonial, i) => {
-                        return <SwiperSlide
+                        return <SwiperSlide key={testimonial.id}
                             className="w-52 h-[500px] text-center border-2 border-black rounded-md
                              py-5 mt-3 bg-black transition duration-800 ease-linear"
                         >

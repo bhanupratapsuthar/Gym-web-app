@@ -21,7 +21,7 @@ const Login = () => {
             dispatch(setLoading(true))
             const { email, password } = data;
             await dispatch(login({ email, password })).unwrap();
-            navigate('/dashboard');
+            navigate('/');
             dispatch(setLoading(false))
         } catch (error) {
             console.error('Error during login:', error);
@@ -119,7 +119,7 @@ const Login = () => {
                                 disabled={isLoading}
                                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-900 bg-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                    'Sign in'
+                                    Sign in
                             </button>
                         </div>
                     </form>

@@ -1,19 +1,41 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useSelector, useDispatch } from "react-redux";
+import { clearAuth } from "../redux/slices/authSlice";
+import CartIcon from "./CartIcon";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const toggleMenu = () => setIsOpen(!isOpen);
+    const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+    const { isLoggedIn } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(clearAuth());
+        navigate("/login");
+    };
 
     const navLinks = [
         { to: '/', text: 'Home' },
         { to: '/membership+plan', text: 'Membership' },
         { to: '/blogs', text: 'Blogs' },
         { to: '/store', text: 'Store' },
-        { to: '/login', text: 'Login' }
+        ...(isLoggedIn
+            ? []
+            : [
+                  { to: '/login', text: 'Login' },
+                  { to: '/signup', text: 'Signup' },
+              ]),
     ];
+
+    const handleGoToCart = () => {
+            navigate("/cart");
+    }
 
     return (
         <div className="w-full">
@@ -21,7 +43,7 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="flex justify-between items-center h-[87px]">
                         {/* Logo */}
-                        <NavLink to='/' className="flex-shrink-0">
+                        <NavLink to="/" className="flex-shrink-0">
                             <img src="../logo.jpeg" alt="Logo" className="h-12 w-auto" />
                         </NavLink>
 
@@ -41,20 +63,70 @@ const Navbar = () => {
                                     {link.text}
                                 </NavLink>
                             ))}
+
+                            {/* Cart Icon */}
+                            <button
+                                    onClick={handleGoToCart}
+                                    className="text-white hover:scale-110 transition duration-200 ease-in">
+                                    <CartIcon />
+                            </button>
+
+                            {/* Profile Dropdown */}
+                            {isLoggedIn && (
+                                <div className="relative">
+                                    <button
+                                        onClick={toggleDropdown}
+                                        className="text-xl font-semibold text-white hover:scale-110 transition duration-200 ease-in"
+                                    >
+                                        Profile
+                                    </button>
+                                    {isDropdownOpen && (
+                                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+                                            <button
+                                                onClick={() => {
+                                                    setIsDropdownOpen(false);
+                                                    navigate("/dashboard");
+                                                }}
+                                                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Dashboard
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    setIsDropdownOpen(false);
+                                                    handleLogout();
+                                                }}
+                                                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Logout
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <button
-                            onClick={toggleMenu}
-                            className="md:hidden text-white p-2 rounded-lg hover:bg-gray-800 transition-colors"
-                            aria-label="Toggle menu"
-                        >
-                            {isOpen ? (
-                                <X className="h-6 w-6" />
-                            ) : (
-                                <Menu className="h-6 w-6" />
-                            )}
-                        </button>
+                        <div className="md:hidden flex items-center space-x-4">
+                            {/* Cart Icon for Mobile */}
+                            <NavLink 
+                                to="/cart" 
+                                className="text-white"
+                            >
+                                <CartIcon />
+                            </NavLink>
+                            <button
+                                onClick={toggleMenu}
+                                className="text-white p-2 rounded-lg hover:bg-gray-800 transition-colors"
+                                aria-label="Toggle menu"
+                            >
+                                {isOpen ? (
+                                    <X className="h-6 w-6" />
+                                ) : (
+                                    <Menu className="h-6 w-6" />
+                                )}
+                            </button>
+                        </div>
                     </div>
 
                     {/* Mobile Navigation */}
@@ -82,6 +154,36 @@ const Navbar = () => {
                                     {link.text}
                                 </NavLink>
                             ))}
+
+                            {/* Profile Dropdown for Mobile */}
+                            {isLoggedIn && (
+                                <>
+                                <NavLink
+                                    to={"/dashboard"}
+                                    onClick={toggleMenu}
+                                    className={({ isActive }) => `
+                                        text-xl font-semibold text-white 
+                                        hover:bg-gray-800 p-2 rounded-lg
+                                        transition duration-200 ease-in
+                                        ${isActive ? 'bg-gray-800' : ''}
+                                    `}
+                                >
+                                        Dashboard
+                                    </NavLink>
+
+                                    <NavLink
+                                    to={"/dashboard"}
+                                    onClick={toggleMenu}
+                                    className={({ isActive }) => `
+                                        text-xl font-semibold text-white 
+                                        hover:bg-gray-800 p-2 rounded-lg
+                                        transition duration-200 ease-in
+                                    `}
+                                >
+                                        Logout
+                                    </NavLink>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

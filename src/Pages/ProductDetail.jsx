@@ -1,21 +1,44 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Products } from "../redux/slices/productSlice";
+import { ShoppingCart, ShoppingBag } from "lucide-react";
+import { addToCart } from "../redux/slices/cartSlice";
 
 const ProductDetail = () => {
-    const { id } = useParams();  // Get product ID from URL
-    const products = useSelector(Products);  // Get all products from the Redux store
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const products = useSelector(Products);
+    const cartItems = useSelector((state) => state.cart.items);
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-    // Find the product with the corresponding ID
     const product = products.find((product) => product._id === id);
+    const isInCart = cartItems.some((item) => item._id === id);
 
     if (!product) {
-        return <p>Product not found!</p>;
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <p className="text-xl text-gray-600">Product not found!</p>
+            </div>
+        );
     }
 
     const originalPrice = product.price * 1.3;
     const discountPercentage = ((originalPrice - product.price) / originalPrice) * 100;
+
+    const handleAddToCart = () => {
+        dispatch(addToCart({
+            _id: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+        }));
+    };
+
+    const handleGoToCart = () => {
+        navigate('/cart');
+    };
 
     return (
         <div className="flex justify-center items-center py-10 px-4 bg-gray-50">
@@ -43,9 +66,23 @@ const ProductDetail = () => {
                             </div>
                         </div>
                         <div className="mt-6">
-                            <button className="w-full py-3 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                                Add to Cart
-                            </button>
+                            {isInCart  ? (
+                                <button
+                                    onClick={handleGoToCart}
+                                    className="w-full py-3 bg-green-500 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 flex items-center justify-center gap-2 transition-colors duration-200"
+                                >
+                                    <ShoppingBag size={20} />
+                                    Go to Cart
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="w-full py-3 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 flex items-center justify-center gap-2 transition-colors duration-200"
+                                >
+                                    <ShoppingCart size={20} />
+                                    Add to Cart
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

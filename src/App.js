@@ -22,6 +22,9 @@ import pictures from './data/data3';
 import OtpPage from './components/OtpPage';
 import { BlogList } from './components/blog/BlogList';
 import { BlogDetail } from './components/blog/BlogDetail';
+import Dashboard from './Pages/Dashboard';
+import ProtectedRoute from './auth/ProtectedRoute';
+import Cart from './Pages/Cart';
 
 function App() {
 
@@ -38,6 +41,15 @@ function App() {
           isLoggedIn={isLoggedIn}
           datas={datas}
         />} />
+        <Route element={
+          <ProtectedRoute>
+            <Dashboard/>
+          </ProtectedRoute>
+        }>
+          <Route path='/dashboard' element={<Dashboard/>}/>
+        </Route>
+          
+          <Route path='/cart' element={<Cart/>}/>
         <Route path='/blogs' element={<BlogList />} />
         <Route path="/blogs/:id" element={<BlogDetail />} />
         <Route path='/contact_us' element={<ContactUs />} />

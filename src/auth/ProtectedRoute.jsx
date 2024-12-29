@@ -3,9 +3,10 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { user } from '../redux/slices/authSlice';
 
-const ProtectedRoute = () => {
-    const {token} = useSelector(user);
-    if (token === null) {
+const ProtectedRoute = ({children}) => {
+    const token = useSelector((state)=>state.auth.token)
+
+    if (!token) {
         return <Navigate to={"/login"} />;
     } else {
         return children;

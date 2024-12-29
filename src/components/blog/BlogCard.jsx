@@ -8,7 +8,7 @@ export function BlogCard({ post }) {
   return (
     <article 
       className="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
-      onClick={() => navigate(`/blogs/${post.id}`)}
+      onClick={() => navigate(`/blogs/${post._id}`)}
     >
       <img 
         src={post.imageUrl} 

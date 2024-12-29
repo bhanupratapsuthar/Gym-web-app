@@ -22,11 +22,11 @@ import TrainerCard from "../components/TrainerCard";
 import Reviews from "../components/Reviews";
 import testimonials from "../data/data2";
 import { classCardData, trainerCardData } from "../data/data4";
+import { useSelector } from "react-redux";
 
 
 const Home = ({ datas, isLoggedIn }) => {
-
-
+  
     return (
       <>
 
@@ -58,7 +58,7 @@ const Home = ({ datas, isLoggedIn }) => {
         </div>
       </section>
 
-      <div className="h-[100vh] ">
+      <div className="h-[100vh] md:block hidden">
             <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
@@ -78,7 +78,7 @@ const Home = ({ datas, isLoggedIn }) => {
           slot="container-start"
           className="parallax-bg"
           style={{
-            'background-image':
+            'backgroundImage':
               'url(https://r4.wallpaperflare.com/wallpaper/787/610/414/muscle-press-pose-athlete-workout-hd-wallpaper-742e3fa43719b9e7c12bea17c7ddd322.jpg)',
           }}
           data-swiper-parallax="-23%"

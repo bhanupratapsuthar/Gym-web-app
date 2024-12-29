@@ -33,7 +33,7 @@ const OtpPage = () => {
       toast.success('Email verified successfully!');
       navigate('/dashboard');
     } catch (error) {
-      toast.error('Invalid OTP. Please try again.');
+      toast.error(error?.response?.data?.message);
       setError('Invalid OTP');
     } finally {
       setIsSubmitting(false);

@@ -16,8 +16,6 @@ const SignUpForm = ({ setIsLoggedIn }) => {
     const dispatch = useDispatch();
     const isLoading = useSelector(loading);
 
-    console.log(isLoading);
-
 
 
     const onSubmit = async (data) => {
@@ -30,7 +28,6 @@ const SignUpForm = ({ setIsLoggedIn }) => {
 
         try {
             const response = await axios.post("http://localhost:8000/auth/signup", data);
-            console.log("laxman..",response);
             
             toast.success(response?.data?.message);
             navigate("/otp", { state: { email: data.email } });

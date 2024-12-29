@@ -35,9 +35,6 @@ const MemberShipPlansInquery = () => {
             ...queryData
         }
 
-        console.log("QueryData is printing.");
-        console.log(queryFormData);
-
         navigate("/query+submit");
     }
 

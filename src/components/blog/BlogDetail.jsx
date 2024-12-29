@@ -1,13 +1,15 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, User } from 'lucide-react';
-import { blogPosts } from '../../data/blogData';
+import { Blogs } from '../../redux/slices/blogSlice';
+import { useSelector } from 'react-redux';
 
 
 export function BlogDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const post = blogPosts.find(post => post.id === Number(id));
+  const blogs = useSelector(Blogs)
+  const post = blogs.find(post => post._id === id);
 
   if (!post) {
     return (
@@ -38,7 +40,7 @@ export function BlogDetail() {
       <img 
         src={post.imageUrl} 
         alt={post.title}
-        className="w-full h-64 object-cover rounded-xl mb-8"
+        className="w-full h-full object-cover rounded-xl mb-8"
       />
       
       <div className="space-y-4">
@@ -52,7 +54,7 @@ export function BlogDetail() {
           </div>
           <div className="flex items-center">
             <Calendar className="w-4 h-4 mr-1" />
-            {post.date}
+            {new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           </div>
         </div>
         
