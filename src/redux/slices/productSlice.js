@@ -47,6 +47,9 @@ const productsSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    deleteProduct: (state, action) => {
+      state.products = state.products.filter(product => product._id !== action.payload);
+    }
   },
 });
 
@@ -56,7 +59,7 @@ export const Loading = (state) => state.products.loading;
 export const Errors = (state) => state.products.error;
 
 // Export actions
-export const { clearProducts } = productsSlice.actions;
+export const { clearProducts,deleteProduct } = productsSlice.actions;
 
 // Export reducer
 export default productsSlice.reducer;

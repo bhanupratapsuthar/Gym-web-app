@@ -48,6 +48,9 @@ const blogSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    deleteBlog: (state, action) => {
+      state.blogs = state.blogs.filter(blog => blog._id !== action.payload);
+    }
   },
 });
 
@@ -57,7 +60,7 @@ export const Loading = (state) => state.blogs.loading;
 export const Errors = (state) => state.blogs.error;
 
 // Export actions
-export const { clearBlogs } = blogSlice.actions;
+export const { clearBlogs,deleteBlog } = blogSlice.actions;
 
 // Export reducer
 export default blogSlice.reducer;

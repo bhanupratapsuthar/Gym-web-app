@@ -7,9 +7,8 @@ const initialState = {
     isLoggedIn: false,
     loading: false,
     error: null,
-    token:null
+    token:  null
 };
-
 export const login = createAsyncThunk(
     "auth/login",
     async ({ email, password }, thunkAPI) => {

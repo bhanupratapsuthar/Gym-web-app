@@ -25,3 +25,12 @@ export const createBlog = async (data,image) => {
     throw error
   }
 };
+
+export const deleteBlogApi = async (id) => {
+  try {
+      const response = await httpClient.delete(`/blog/${id}`);
+      return response.data;
+  } catch (error) {
+      throw error;
+  }
+};

@@ -2,13 +2,12 @@ import React from "react";
 
 const Gallary = ({ pictures }) => {
     return (
-        <div className="grid lg:grid-cols-4 sm:grid-cols-2 xs:grid-cols-1   
-               space-y-10 space-x-10 min-h-[80vh] items-end p-10 bg-neutral-800 bg-opacity-90">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2 xs:grid-cols-1 gap-8 min-h-[80vh] p-10 bg-neutral-800 bg-opacity-90">
             {
                 pictures.map((picture, i) => {
                     return (
-                        <div className="justify-center">
-                            <img src={picture.image} className="h-[200px]" alt="" loading="lazy" />
+                        <div key={i} className="flex justify-center items-center">
+                            <img src={picture.image} className="w-full h-[250px] object-cover" alt="" loading="lazy" />
                         </div>
                     )
                 })

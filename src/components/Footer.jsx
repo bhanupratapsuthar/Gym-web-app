@@ -6,7 +6,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 py-16 text-white">
+    <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 py-16 text-white">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-6 md:px-12">
         {/* Company Section */}
         <div>
@@ -40,7 +40,7 @@ const Footer = () => {
             <a href="#" className="hover:underline hover:opacity-100 opacity-80 transition duration-200 font-semibold text-lg"
               onClick={() => navigate('/contact_us')}>Contact Us</a>
             <a href="#" className="hover:underline hover:opacity-100 opacity-80 transition duration-200 font-semibold text-lg"
-              onClick={() => navigate('/gallery')}>Events & Gallery</a>
+              onClick={() => navigate('/gallary')}>Events & Gallery</a>
           </div>
         </div>
 

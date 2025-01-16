@@ -1,9 +1,12 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Products } from "../redux/slices/productSlice";
+import { deleteProduct, Products } from "../redux/slices/productSlice";
 import { ShoppingCart, ShoppingBag } from "lucide-react";
 import { addToCart } from "../redux/slices/cartSlice";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { toast } from "react-toastify";
+import { deleteProuductApi } from "../services/productApis";
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -12,6 +15,9 @@ const ProductDetail = () => {
     const products = useSelector(Products);
     const cartItems = useSelector((state) => state.cart.items);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const user = useSelector((state) => state.auth.user?.user);
+    const role = user ? user.role : null;
+    const isAdmin = role === 'Admin';   
 
     const product = products.find((product) => product._id === id);
     const isInCart = cartItems.some((item) => item._id === id);
@@ -40,6 +46,23 @@ const ProductDetail = () => {
         navigate('/cart');
     };
 
+    const onDeleteButtonClick = async (productId) => {
+        const toastId = toast.loading("Loading...");
+        try {
+            const response = await deleteProuductApi(productId);
+            if(response.success){
+                dispatch(deleteProduct(productId));
+                toast.success('Product deleted successfully!');
+                navigate("/store")
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Error deleting product');
+        }finally {
+            toast.dismiss(toastId);
+          }
+    }
+
     return (
         <div className="flex justify-center items-center py-10 px-4 bg-gray-50">
             <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg overflow-hidden">
@@ -54,7 +77,13 @@ const ProductDetail = () => {
                     </div>
                     {/* Product Info */}
                     <div className="w-full lg:w-1/2 p-6">
-                        <h2 className="text-3xl font-semibold text-gray-900 mb-3">{product.name}</h2>
+                        <div className="flex flex-row justify-between">
+                            <h2 className="text-3xl font-semibold text-gray-900 mb-3">{product.name}</h2>
+                            {
+                               isAdmin && <RiDeleteBin6Line onClick={()=> onDeleteButtonClick(product._id)} size={22} className="text-red-500" />
+                                
+                            }
+                        </div>
                         <p className="text-lg text-gray-600 mb-4">{product.description}</p>
                         <div className="flex flex-col space-y-3">
                             <div className="flex items-center justify-between">

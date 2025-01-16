@@ -5,7 +5,7 @@ export function MembershipPlans() {
   const plans = [
     {
       title: "Basic",
-      price: "$29",
+      price: "₹599",
       features: [
         "Access to gym equipment",
         "Basic fitness assessment",
@@ -16,7 +16,7 @@ export function MembershipPlans() {
     },
     {
       title: "Premium",
-      price: "$59",
+      price: "₹999",
       features: [
         "All Basic features",
         "Unlimited group classes",
@@ -29,7 +29,7 @@ export function MembershipPlans() {
     },
     {
       title: "Elite",
-      price: "$99",
+      price: "₹1599",
       features: [
         "All Premium features",
         "4 personal training sessions/month",

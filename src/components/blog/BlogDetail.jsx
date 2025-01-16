@@ -1,8 +1,11 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, User } from 'lucide-react';
-import { Blogs } from '../../redux/slices/blogSlice';
-import { useSelector } from 'react-redux';
+import { Blogs, deleteBlog } from '../../redux/slices/blogSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { deleteBlogApi } from '../../services/blogApis';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 
 export function BlogDetail() {
@@ -10,6 +13,28 @@ export function BlogDetail() {
   const navigate = useNavigate();
   const blogs = useSelector(Blogs)
   const post = blogs.find(post => post._id === id);
+
+  const dispatch = useDispatch()
+    const user = useSelector((state) => state.auth.user?.user);
+    const role = user ? user.role : null;
+    const isAdmin = role === 'Admin';
+  
+    const onDeleteButtonClick = async (blogId) => {
+      const toastId = toast.loading("Loading...");
+      try {
+        const response = await deleteBlogApi(blogId);
+        if(response.success){
+              toast.success('Blog deleted successfully!');
+              dispatch(deleteBlog(blogId));
+              navigate("/blogs")
+          }
+      } catch (error) {
+          console.error(error);
+          toast.error('Error deleting product');
+      }finally {
+          toast.dismiss(toastId);
+        }
+  }
 
   if (!post) {
     return (
@@ -45,7 +70,12 @@ export function BlogDetail() {
       
       <div className="space-y-4">
         <span className="text-purple-400 font-semibold">{post.category}</span>
-        <h1 className="text-4xl font-bold text-white">{post.title}</h1>
+        <div className="flex flex-row justify-between">
+          <h1 className="text-4xl font-bold text-white">{post.title}</h1>
+            {
+             isAdmin && <RiDeleteBin6Line onClick={()=> onDeleteButtonClick(post._id)} size={22} className="text-red-500" />                 
+            }
+        </div>
         
         <div className="flex items-center space-x-4 text-gray-400">
           <div className="flex items-center">

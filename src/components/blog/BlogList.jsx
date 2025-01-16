@@ -8,20 +8,18 @@ import { createBlog } from '../../services/blogApis';
 import { Blogs, fetchBlogs } from '../../redux/slices/blogSlice';
 
 export function BlogList() {
-  const user = useSelector((state) => state.auth.user.user);
+  const user = useSelector((state) => state.auth.user?.user);
   const role = user ? user.role : null;
   const isAdmin = role === 'Admin';
   const dispatch = useDispatch();
   const blogs = useSelector(Blogs);
 
-  useEffect(() => {
-    // Only fetch products if they are not already in the state
-    if (!blogs || blogs.length === 0) {
-      dispatch(fetchBlogs());
-    }
-  }, [dispatch, blogs]);
+
+
 
   const [image, setImage] = useState(null);
+  const [showForm, setShowForm] = useState(false)
+  const [blogCreated,setBlogCreated] = useState(false)
   const [previewImage, setPreviewImage] = useState(null);
   const {
     register,
@@ -49,8 +47,8 @@ export function BlogList() {
     const toastId = toast.loading("Loading...");
     try {
       const response = await createBlog(data, image);
-      console.log('Blog created successfully:', response.data);
       toast.success('Blog created successfully!');
+      setBlogCreated(true)
 
       // Reset the form
       reset();
@@ -64,6 +62,14 @@ export function BlogList() {
     }
   };
 
+  useEffect(() => {
+    // Only fetch products if they are not already in the state
+    if (!blogs || blogs.length === 0 || blogCreated) {
+      dispatch(fetchBlogs());
+      setBlogCreated(false)
+    }
+  }, [dispatch, blogs,blogCreated]);
+
   return (
     <div className='w-full bg-slate-900'>
       <div className="w-11/12 mx-auto px-4 py-12 ">
@@ -74,7 +80,19 @@ export function BlogList() {
           </p>
         </div>
 
-        {isAdmin && (
+        {
+            isAdmin && (
+                <div className="flex justify-end mt-10">
+                    <button onClick={() => setShowForm(prev => !prev)} className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white ">
+                        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Add Blog +
+                        </span>
+                    </button>
+                </div>
+            )
+        }
+
+        {isAdmin && showForm &&(
           <div className="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto mb-12">
             <h2 className="text-2xl font-bold mb-4">Create a New Blog Post</h2>
             <form onSubmit={handleSubmit(onSubmit)}>

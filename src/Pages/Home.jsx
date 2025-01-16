@@ -23,10 +23,11 @@ import Reviews from "../components/Reviews";
 import testimonials from "../data/data2";
 import { classCardData, trainerCardData } from "../data/data4";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = ({ datas, isLoggedIn }) => {
-  
+    const navigate = useNavigate()
     return (
       <>
 
@@ -50,7 +51,7 @@ const Home = ({ datas, isLoggedIn }) => {
           <div className="max-w-3xl">
             <h1 className="text-6xl font-bold mb-6">SHAPE YOUR BODY</h1>
             <p className="text-xl mb-8">Transform your physique and elevate your lifestyle with our state-of-the-art facilities and expert trainers.</p>
-            <button className="bg-red-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transition-colors flex items-center">
+            <button onClick={()=>navigate("/membership+plan")} className="bg-red-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transition-colors flex items-center">
               Start Training
                <Play className="ml-2 h-5 w-5" />
             </button>
@@ -160,15 +161,13 @@ const Home = ({ datas, isLoggedIn }) => {
         <div className="relative max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-5xl font-bold mb-8">START YOUR JOURNEY TODAY</h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto">Join our community of fitness enthusiasts and transform your life with our expert guidance and state-of-the-art facilities.</p>
-          <button className="bg-red-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transition-colors">
+          <button onClick={()=>navigate("/membership+plan")} className="bg-red-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transition-colors">
             Become a Member
           </button>
         </div>
       </section>
 
-      <div className=" h-[600px]">
         <Reviews testimonials={testimonials} />
-      </div>
      
     </div>
       </>

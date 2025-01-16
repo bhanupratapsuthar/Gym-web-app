@@ -25,6 +25,7 @@ import { BlogDetail } from './components/blog/BlogDetail';
 import Dashboard from './Pages/Dashboard';
 import ProtectedRoute from './auth/ProtectedRoute';
 import Cart from './Pages/Cart';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
 
 
       <Navbar />
+      <ScrollToTop/>
       <Routes>
         <Route path='/' element={<Home
           isLoggedIn={isLoggedIn}

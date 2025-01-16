@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearAuth } from "../redux/slices/authSlice";
 import CartIcon from "./CartIcon";
+import logo from "../pictures/GymLogo.webp"
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +45,7 @@ const Navbar = () => {
                     <div className="flex justify-between items-center h-[87px]">
                         {/* Logo */}
                         <NavLink to="/" className="flex-shrink-0">
-                            <img src="../logo.jpeg" alt="Logo" className="h-12 w-auto" />
+                            <img src={logo} alt="Logo" className="w-20 h-20 rounded-full object-cover" />
                         </NavLink>
 
                         {/* Desktop Navigation */}
@@ -172,8 +173,11 @@ const Navbar = () => {
                                     </NavLink>
 
                                     <NavLink
-                                    to={"/dashboard"}
-                                    onClick={toggleMenu}
+                                    to={"/login"}
+                                    onClick={() => {
+                                                    setIsOpen(false);
+                                                    handleLogout();
+                                                }}
                                     className={({ isActive }) => `
                                         text-xl font-semibold text-white 
                                         hover:bg-gray-800 p-2 rounded-lg
