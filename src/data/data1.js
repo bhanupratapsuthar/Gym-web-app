@@ -1,15 +1,15 @@
 const datas = [
     {
         id: 1,
-        image: "https://wallpapercave.com/wp/wp9893042.jpg"
+        image: "https://res.cloudinary.com/dbdxzp3jk/image/upload/v1738598788/gymImages/wp9893042_hhvwx5.jpg"
     },
     {
         id: 2,
-        image: "https://wallpapercave.com/wp/wp5885891.jpg"
+        image: "https://res.cloudinary.com/dbdxzp3jk/image/upload/v1738598867/gymImages/wp5885891_tiilwk.webp"
     },
     {
         id: 3,
-        image: "https://wallpaperaccess.com/full/4722381.jpg"
+        image: "https://res.cloudinary.com/dbdxzp3jk/image/upload/v1738598917/gymImages/4722381_c3ie5h.jpg"
     },
 ]
 
