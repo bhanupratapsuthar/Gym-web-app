@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '../redux/slices/cartSlice';
 import CartItem from '../components/CartItem';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,10 @@ const Cart = () => {
 
   const handleProceedToCheckout = () => {
     if (isLoggedIn) {
-      // do nothing
+      toast.success("The purchasing service will be available in the near future.")
+    }else{
+      navigate('/login');
     }
-    navigate('/login');
   }
 
   if (items.length === 0) {

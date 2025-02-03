@@ -26,6 +26,7 @@ import Dashboard from './Pages/Dashboard';
 import ProtectedRoute from './auth/ProtectedRoute';
 import Cart from './Pages/Cart';
 import ScrollToTop from './components/ScrollToTop';
+import PageNotFound from './Pages/PageNotFound';
 
 function App() {
 
@@ -67,6 +68,7 @@ function App() {
         <Route path='/memberships' element={<MemberShipsFaq />} />
         <Route path='/membership+plan' element={<MemberShipPlansInquery />} />
         <Route path='/query+submit' element={<ThankYou />} />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
 
       <Footer />
