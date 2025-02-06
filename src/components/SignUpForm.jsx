@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loading, setLoading } from "../redux/slices/authSlice";
+import { httpClient } from "../services/apiInstance";
 
 const SignUpForm = ({ setIsLoggedIn }) => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const SignUpForm = ({ setIsLoggedIn }) => {
         dispatch(setLoading(true));
 
         try {
-            const response = await axios.post("http://localhost:8000/auth/signup", data);
+            const response = await httpClient.post("auth/signup", data);
             
             toast.success(response?.data?.message);
             navigate("/otp", { state: { email: data.email } });

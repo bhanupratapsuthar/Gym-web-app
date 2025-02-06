@@ -25,7 +25,7 @@ const OtpPage = () => {
 
     setIsSubmitting(true);
     try {
-      await axios.post('http://localhost:8000/auth/verify-email', {
+      await httpClient.post('auth/verify-email', {
         email,
         otp: parseInt(otpString),
       });
@@ -42,7 +42,7 @@ const OtpPage = () => {
 
   const handleResendOtp = async () => {
     try {
-      await axios.post('http://localhost:8000/auth/resend-otp', { email });
+      await httpClient.post('auth/resend-otp', { email });
       toast.success('New OTP has been sent to your email');
     } catch (error) {
       toast.error('Failed to resend OTP. Please try again.');
