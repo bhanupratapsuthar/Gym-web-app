@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { RefreshCw } from 'lucide-react';
 import OtpInput from './OtpInput';
+import { httpClient } from '../services/apiInstance';
 
 const OtpPage = () => {
   const { state } = useLocation();
